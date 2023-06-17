@@ -34,7 +34,7 @@ class EmailManager:
 email_manager = EmailManager()
 email_manager.get_email()
 
-response = input("email adresinizi güncellemek istiyor musunuz? (Y/N): ")
+response = input("email adresinizi güncellemek istiyor musunuz? (E/H): ")
 
 if response.lower() == "e":
     email_manager.update_email()
