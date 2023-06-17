@@ -1,21 +1,28 @@
-def mailcreate(nickname, mailtype=""):
-    mailadresi = "@".join([nickname, mailtype])
-    return mailadresi
+import re
 
+def is_valid_email(email):
+    pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+    return re.match(pattern, email) is not None
 
-nickname = input("Please enter your username: ")
-mail = input("Please enter the mail type: ")
-if mail:
-    print("Mail adresi:", mailcreate(nickname, mail))
+def update_email(email):
+    new_email = input("Lütfen yeni email adresinizi girin: ")
+    if is_valid_email(new_email):
+        print("email adresi başarıyla güncellendi!")
+        return new_email
+    else:
+        print("Geçersiz email adresi. Güncelleme başarısız oldu.")
+        return email
+
+email = input("Lütfen email adresinizi girin: ")
+
+if is_valid_email(email):
+    print("Geçerli email adresi.")
 else:
-    print("Mail adresi:", mailcreate(nickname))
+    raise ValueError("Geçersiz email adresi.")
 
-response = input("Would you like to modify the email address? (Y/N): ")
-if response.lower() == "y":
-    new_mail = input("Please enter the new mail type: ")
-    print("Modified mail adresi:", mailcreate(nickname, new_mail))
+response = input("email adresinizi güncellemek istiyor musunuz? (E/H): ")
 
-check_mail = input("Please enter an email address to check: ")
-if check_mail == mailcreate(nickname, mail):
-    print("This email address is already in use.")
-    print("Your email address has been created.")
+if response.lower() == "e":
+    email = update_email(email)
+
+print("email adresiniz: ", email)
